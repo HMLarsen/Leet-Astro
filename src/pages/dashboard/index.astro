@@ -1,0 +1,13 @@
+---
+import serverAuth from "../../auth/server";
+import DashboardLayout from "../../layouts/DashboardLayout.astro";
+
+/* Check current session */
+const session = Astro.cookies.get("session");
+const user = await serverAuth.getUser(session?.value);
+if (!user) {
+	return Astro.redirect("/signin");
+}
+---
+
+<DashboardLayout title="Home" />

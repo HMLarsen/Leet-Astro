@@ -1,0 +1,25 @@
+---
+import EventPublic from "../../components/EventPublic.svelte";
+import eventsCollection from "../../firebase/collections/events";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Event } from "../../models/client/event.model";
+
+const { id } = Astro.params;
+let title = "Evento não encontrado";
+let event: Event | undefined;
+
+const serverEvent = await eventsCollection.getEvent(id!);
+if (serverEvent) {
+	title = serverEvent.name;
+	event = {
+		id: serverEvent.id,
+		name: serverEvent.name,
+		date: serverEvent.date?.toDate(),
+	};
+}
+---
+
+<BaseLayout title={title}>
+	{!event && <h1>Evento não encontrado!</h1>}
+	{event && <EventPublic client:only="svelte" event={event} />}
+</BaseLayout>

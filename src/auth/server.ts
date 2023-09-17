@@ -1,5 +1,5 @@
 import { getAuth } from "firebase-admin/auth";
-import { app } from "./firebase/server";
+import { app } from "../firebase/server";
 
 async function getUser(session?: string) {
 	if (!session) return undefined;
@@ -8,7 +8,7 @@ async function getUser(session?: string) {
 	return auth.getUser(decodedCookie.uid);
 }
 
-const utils = {
+const serverAuth = {
 	getUser
 };
-export default utils;
+export default serverAuth;

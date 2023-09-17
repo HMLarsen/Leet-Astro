@@ -1,5 +1,6 @@
 ---
-import utils from "../utils";
+import { Image } from "astro:assets";
+import serverAuth from "../auth/server";
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
@@ -9,14 +10,26 @@ const { title } = Astro.props;
 
 /* Check current session */
 const session = Astro.cookies.get("session");
-const user = await utils.getUser(session?.value);
+const user = await serverAuth.getUser(session?.value);
 if (!user) {
 	return Astro.redirect("/signin");
 }
 ---
 
 <BaseLayout title={"Dashboard - " + title}>
-	<h1>Welcome {user?.displayName}</h1>
+	<h1>
+		Welcome {user?.displayName}
+		{
+			!!user.photoURL && (
+				<Image
+					src={user.photoURL}
+					alt="user logo"
+					width="50"
+					height="50"
+				/>
+			)
+		}
+	</h1>
 	<p>We are happy to see you here</p>
 	<form action="/api/auth/signout">
 		<button type="submit">Sign out</button>

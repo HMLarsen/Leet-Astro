@@ -1,47 +1,8 @@
 ---
-import { Timestamp, getFirestore } from "firebase-admin/firestore";
-import { app } from "../../firebase/server";
+import Events from "../../components/Events.svelte";
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
-import utils from "../../utils";
-
-interface Event {
-	id: string;
-	createdAt: Date;
-	name: string;
-	date: Timestamp;
-	description: string;
-	acceptingParticipants: boolean;
-}
-
-let events: Event[] = [];
-const session = Astro.cookies.get("session");
-const user = await utils.getUser(session?.value);
-if (user) {
-	const db = getFirestore(app);
-	const eventsRef = db
-		.collection("users")
-		.doc(user.email!)
-		.collection("events");
-	const eventsSnapshot = await eventsRef.get();
-	events = eventsSnapshot.docs.map((doc) => ({
-		...doc.data(),
-	})) as Event[];
-}
 ---
 
 <DashboardLayout title="Eventos">
-	<h1>Eventos</h1>
-	<ul>
-		{
-			events.map((event) => (
-				<li>
-					<a href={`/friend/${event.id}`}>{event.name}</a>
-					<span>({event.createdAt})</span>
-					<span>({event.date.toDate().toLocaleDateString()})</span>
-					<strong>{event.description}</strong>
-					{event.acceptingParticipants}
-				</li>
-			))
-		}
-	</ul>
+	<Events client:only="svelte" />
 </DashboardLayout>

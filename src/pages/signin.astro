@@ -1,11 +1,11 @@
 ---
+import serverAuth from "../auth/server";
 import Login from "../components/Login.svelte";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import utils from "../utils";
 
 /* Check current session */
 const session = Astro.cookies.get("session");
-const user = await utils.getUser(session);
+const user = await serverAuth.getUser(session?.value);
 if (user) {
 	return Astro.redirect("/dashboard");
 }

@@ -1,25 +1,10 @@
-<script>
-	import {
-	    GoogleAuthProvider,
-	    getAuth,
-	    signInWithPopup,
-	} from "firebase/auth";
-	import { app } from "../firebase/client";
-
-	const auth = getAuth(app);
+<script lang="ts">
+	import clientAuth from "../auth/client";
 
 	async function googleSignin() {
-		const provider = new GoogleAuthProvider();
-		const userCredential = await signInWithPopup(auth, provider);
-		const idToken = await userCredential.user.getIdToken();
-		const res = await fetch("/api/auth/signin", {
-			headers: {
-				Authorization: `Bearer ${idToken}`,
-			},
-		});
-		if (res.redirected) {
-			window.location.assign(res.url);
-		}
+		clientAuth
+			.googleSignin()
+			.then((res) => window.location.assign(res.url));
 	}
 </script>
 

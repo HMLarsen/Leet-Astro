@@ -9,8 +9,5 @@ export default defineConfig({
 	adapter: node({
 		mode: "standalone"
 	}),
-	integrations: [svelte()],
-	redirects: {
-		'/dashboard': '/dashboard/eventos'
-	}
+	integrations: [svelte()]
 });
