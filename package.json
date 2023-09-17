@@ -1,0 +1,20 @@
+{
+  "name": "leet-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "astro": "astro",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/node": "^6.0.0",
+    "@astrojs/svelte": "^4.0.2",
+    "astro": "^3.1.0",
+    "firebase": "^10.4.0",
+    "firebase-admin": "^11.10.1",
+    "sass": "^1.67.0",
+    "svelte": "^4.2.0"
+  }
+}

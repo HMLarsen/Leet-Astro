@@ -1,0 +1,18 @@
+---
+import Login from "../components/Login.svelte";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import utils from "../utils";
+
+/* Check current session */
+const session = Astro.cookies.get("session");
+const user = await utils.getUser(session);
+if (user) {
+	return Astro.redirect("/dashboard");
+}
+---
+
+<BaseLayout title="Login">
+	<a href="/">Home</a>
+	<br />
+	<Login client:only="svelte" />
+</BaseLayout>

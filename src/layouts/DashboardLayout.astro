@@ -1,0 +1,25 @@
+---
+import utils from "../utils";
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+	title: string;
+}
+const { title } = Astro.props;
+
+/* Check current session */
+const session = Astro.cookies.get("session");
+const user = await utils.getUser(session?.value);
+if (!user) {
+	return Astro.redirect("/signin");
+}
+---
+
+<BaseLayout title={"Dashboard - " + title}>
+	<h1>Welcome {user?.displayName}</h1>
+	<p>We are happy to see you here</p>
+	<form action="/api/auth/signout">
+		<button type="submit">Sign out</button>
+	</form>
+	<slot />
+</BaseLayout>
