@@ -1,11 +1,33 @@
 <script lang="ts">
+	import { onMount } from "svelte";
 	import clientAuth from "../auth/client";
 
+	let loading = true;
+	let isAuthenticated = false;
+
 	async function googleSignin() {
-		clientAuth
-			.googleSignin()
-			.then((res) => window.location.assign(res.url));
+		await clientAuth.googleSignin();
+		isAuthenticated = true;
 	}
+	async function logout() {
+		await clientAuth.logout();
+		isAuthenticated = false;
+	}
+	function navigateToDashboard() {
+		window.location.assign("/dashboard");
+	}
+
+	onMount(async () => {
+		isAuthenticated = await clientAuth.isAuthenticated();
+		loading = false;
+	});
 </script>
 
-<button on:click={googleSignin}>Sign in with Google</button>
+{#if loading}
+	carregando...
+{:else if !isAuthenticated}
+	<button on:click={googleSignin}>Sign in with Google</button> <br />
+{:else}
+	<button on:click={navigateToDashboard}>Dashboard</button>
+	<button on:click={logout}>Logout</button>
+{/if}

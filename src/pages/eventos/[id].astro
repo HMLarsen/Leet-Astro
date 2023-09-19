@@ -4,6 +4,8 @@ import eventsCollection from "../../firebase/collections/events";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { Event } from "../../models/client/event.model";
 
+export const prerender = false;
+
 const { id } = Astro.params;
 let title = "Evento não encontrado";
 let event: Event | undefined;

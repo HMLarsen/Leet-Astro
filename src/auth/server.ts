@@ -1,11 +1,10 @@
 import { getAuth } from "firebase-admin/auth";
 import { app } from "../firebase/server";
 
-async function getUser(session?: string) {
-	if (!session) return undefined;
+async function getUser(token: string) {
 	const auth = getAuth(app);
-	const decodedCookie = await auth.verifySessionCookie(session);
-	return auth.getUser(decodedCookie.uid);
+	const decodedToken = await auth.verifyIdToken(token);
+	return auth.getUser(decodedToken.uid);
 }
 
 const serverAuth = {

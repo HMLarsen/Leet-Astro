@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import clientAuth from "../auth/client";
 	import type { Event } from "../models/client/event.model";
 
 	let events: Event[] = [];
 
 	onMount(async () => {
-		const response = await fetch("/api/events");
+		const response = await clientAuth.makeRequest("/api/events");
 		events = await response.json();
 	});
 </script>

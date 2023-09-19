@@ -1,7 +1,8 @@
 ---
+import Login from "../components/Login.svelte";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Leet">
-	<a href="/signin">Login</a>
+<BaseLayout>
+	<Login client:only="svelte" />
 </BaseLayout>
