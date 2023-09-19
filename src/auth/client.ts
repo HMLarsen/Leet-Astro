@@ -2,9 +2,8 @@ import { GoogleAuthProvider, getAuth, signInWithPopup, signOut, } from "firebase
 import { app } from "../firebase/client";
 
 async function getIdToken() {
-	const auth = getAuth(app);
-	await auth.authStateReady(); // wait load user from firebase
-	return auth.currentUser?.getIdToken(true);
+	const user = await getUser();
+	return user?.getIdToken(true);
 }
 
 async function makeRequest(endpoint: string) {
@@ -17,8 +16,14 @@ async function makeRequest(endpoint: string) {
 }
 
 async function isAuthenticated() {
-	const idToken = await getIdToken();
-	return !!idToken;
+	const user = await getUser();
+	return !!user;
+}
+
+async function getUser() {
+	const auth = getAuth(app);
+	await auth.authStateReady(); // wait load user from firebase
+	return auth.currentUser;
 }
 
 async function googleSignin() {
@@ -35,6 +40,7 @@ async function logout() {
 const clientAuth = {
 	makeRequest,
 	isAuthenticated,
+	getUser,
 	googleSignin,
 	logout
 };

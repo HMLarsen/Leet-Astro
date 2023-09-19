@@ -7,12 +7,14 @@
 
 	async function googleSignin() {
 		await clientAuth.googleSignin();
-		isAuthenticated = true;
+		navigateToDashboard();
 	}
+
 	async function logout() {
 		await clientAuth.logout();
 		isAuthenticated = false;
 	}
+
 	function navigateToDashboard() {
 		window.location.assign("/dashboard");
 	}
