@@ -10,5 +10,10 @@ export default defineConfig({
 	integrations: [svelte()],
 	redirects: {
 		"/dashboard": "/dashboard/eventos"
+	},
+	vite: {
+		ssr: {
+			noExternal: ['path-to-regexp']
+		}
 	}
 });
