@@ -9,7 +9,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/node": "^6.0.0",
+    "@astrojs/netlify": "^3.0.1",
     "@astrojs/svelte": "^4.0.2",
     "@hotwired/turbo": "^7.3.0",
     "astro": "^3.1.0",
