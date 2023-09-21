@@ -3,7 +3,7 @@ import { app } from "../firebase/client";
 
 async function getIdToken() {
 	const user = await getUser();
-	return user?.getIdToken(true);
+	return user?.getIdToken();
 }
 
 async function makeRequest(endpoint: string) {
