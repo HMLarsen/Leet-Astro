@@ -13,7 +13,6 @@
 	});
 </script>
 
-<h1>Eventos</h1>
 {#if loading}
 	carregando...
 {:else}

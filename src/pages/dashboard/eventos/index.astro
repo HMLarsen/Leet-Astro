@@ -1,0 +1,8 @@
+---
+import Events from "../../../components/Events.svelte";
+import DashboardLayout from "../../../layouts/DashboardLayout.astro";
+---
+
+<DashboardLayout title="Eventos">
+	<Events client:only="svelte" />
+</DashboardLayout>
