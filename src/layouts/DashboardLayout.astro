@@ -1,5 +1,5 @@
 ---
-import Dashboard from "../components/Dashboard.svelte";
+import Dashboard from "../components/dashboard/Dashboard.svelte";
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<BaseLayout title={"Dashboard - " + title}>
+<BaseLayout title={"Dashboard - " + title} description="Gerencie seus eventos.">
 	<Dashboard client:only="svelte" title={title}>
 		<slot />
 	</Dashboard>
