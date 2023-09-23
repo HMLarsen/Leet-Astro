@@ -1,5 +1,4 @@
 import { getFirestore } from "firebase-admin/firestore";
-import { getDownloadURL, getStorage } from "firebase-admin/storage";
 import type { Event } from "../../models/server/event.model";
 import utils from "../../utils";
 import { app } from "../server";
@@ -24,14 +23,10 @@ async function getEvent(eventId: string) {
 
 	if (doc.exists) {
 		// banner file
-		const st = getStorage(app);
-		const bannerFile = st.bucket().file(`events/${eventId}/banner`);
-		const bannerUrl = await getDownloadURL(bannerFile);
+		const bannerUrl = doc.data()?.bannerUrl;
 		const bannerBase64 = await utils.imageUrlToBase64(bannerUrl);
-
 		return ({
 			id: doc.id,
-			bannerUrl,
 			bannerBase64,
 			...doc.data()
 		} as Event);
