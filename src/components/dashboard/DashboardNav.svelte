@@ -15,8 +15,8 @@
 
 	let menuUserOpen = false;
 	const links = [
-		{ url: "/dashboard/eventos", name: "Meus eventos" },
-		{ url: "/dashboard/eventos/novo", name: "Novo evento" },
+		{ url: "/dashboard/eventos/", name: "Meus eventos" },
+		{ url: "/dashboard/eventos/novo/", name: "Novo evento" },
 	];
 </script>
 
