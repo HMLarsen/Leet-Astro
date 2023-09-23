@@ -1,7 +1,6 @@
 [[headers]]
 for = "/*"
 [headers.values]
-#  Multi-value headers are expressed with multi-line strings
 cache-control = '''
 	public,
 	max-age=1234'''
