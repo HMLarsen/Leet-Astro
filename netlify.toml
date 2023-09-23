@@ -3,4 +3,4 @@ for = "/*"
 [headers.values]
 cache-control = '''
 	public,
-	max-age=1234'''
+	max-age=2592000'''
