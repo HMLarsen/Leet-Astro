@@ -1,6 +1,4 @@
-import { fetchBuilder, MemoryCache } from 'node-fetch-cache';
-
-const fetch = fetchBuilder.withCache(new MemoryCache());
+import fetch from 'node-fetch-cache';
 
 async function imageUrlToBase64(url: string) {
 	const response = await fetch(url)
