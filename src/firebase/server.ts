@@ -16,4 +16,5 @@ const serviceAccount = {
 
 export const app = initializeApp({
 	credential: cert(serviceAccount as ServiceAccount),
+	storageBucket: 'gs://leet-play.appspot.com'
 });

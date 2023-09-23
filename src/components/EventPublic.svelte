@@ -4,4 +4,7 @@
 	export let event: Event;
 </script>
 
-<h1>Evento {event.name}</h1>
+<img src={"data:image/*;base64," + event.bannerBase64} alt="evento banner" />
+<h1>{event.name}</h1>
+<h2>{event.description}</h2>
+<h3>{event.date.toLocaleString()}</h3>

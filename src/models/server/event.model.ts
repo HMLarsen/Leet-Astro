@@ -2,9 +2,11 @@ import { Timestamp } from "firebase-admin/firestore";
 
 export interface Event {
 	id: string;
-	createdAt: Date;
+	createdAt: Timestamp;
 	name: string;
-	date: Timestamp;
 	description: string;
+	date: Timestamp;
+	bannerUrl: string;
+	bannerBase64: string;
 	acceptingParticipants: boolean;
 }

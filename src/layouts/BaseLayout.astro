@@ -1,27 +1,46 @@
 ---
+import { ViewTransitions } from "astro:transitions";
+
 interface Props {
 	title?: string;
+	description?: string;
+	imageUrl?: string;
 }
-const { title } = Astro.props;
+const {
+	title,
+	description = "Leet é um sistema gerenciador de eventos. Crie eventos e permita que participantes marquem presença.",
+	imageUrl,
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="pt-BR">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<title>Leet{title ? ` - ${title}` : ""}</title>
+		<title>{title}</title>
 
 		<!-- metatags -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
 		<meta name="author" content="Hugo M. Larsen (hugomarcel91@gmail.com)" />
-		<meta
-			name="description"
-			content="Leet é um sistema gerenciados de eventos. Crie eventos e permita que participantes coloquem seus nomes na lista."
-		/>
-		<meta name="keywords" content="leet, evento, festa, dj, lista, nome" />
+		<meta name="description" content={description} />
+		<meta name="keywords" content="leet, evento, festa" />
 
-		<script src="../turbo-router.ts"></script>
+		<!-- facebook metatags -->
+		<meta property="og:locale" content="pt_BR" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Leet" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		{imageUrl && <meta property="og:image" content={imageUrl} />}
+
+		<!-- twitter metatags -->
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		{imageUrl && <meta name="twitter:image" content={imageUrl} />}
+
+		<ViewTransitions />
 	</head>
 	<body>
 		<slot />

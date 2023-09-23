@@ -6,22 +6,26 @@ import type { Event } from "../../models/client/event.model";
 
 export const prerender = false;
 
-const { id } = Astro.params;
 let title = "Evento não encontrado";
 let event: Event | undefined;
 
+const { id } = Astro.params;
 const serverEvent = await eventsCollection.getEvent(id!);
 if (serverEvent) {
 	title = serverEvent.name;
 	event = {
-		id: serverEvent.id,
-		name: serverEvent.name,
-		date: serverEvent.date?.toDate(),
+		...serverEvent,
+		createdAt: serverEvent.createdAt.toDate(),
+		date: serverEvent.date.toDate(),
 	};
 }
 ---
 
-<BaseLayout title={title}>
+<BaseLayout
+	title={title}
+	description={event ? event.description : undefined}
+	imageUrl={event ? event.bannerUrl : undefined}
+>
 	{!event && <h1>Evento não encontrado!</h1>}
 	{event && <EventPublic client:only="svelte" event={event} />}
 </BaseLayout>
