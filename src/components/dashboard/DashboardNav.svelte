@@ -6,7 +6,6 @@
 	export let user: User;
 
 	let pathname = location.pathname;
-	console.log(pathname);
 
 	async function logout() {
 		await clientAuth.logout();
@@ -78,7 +77,8 @@
 								<a
 									href="#sair"
 									on:click={logout}
-									class="{menuUserOpen ?? 'bg-gray-100' }' block px-4 py-2 text-sm text-gray-700"
+									class="{menuUserOpen ??
+										'bg-gray-100'}' block px-4 py-2 text-sm text-gray-700"
 									role="menuitem"
 									tabindex="-1"
 									id="user-menu-item-2">Sair</a
