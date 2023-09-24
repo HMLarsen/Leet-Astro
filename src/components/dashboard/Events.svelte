@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-	import clientAuth from "../auth/client";
-	import type { Event } from "../models/client/event.model";
+	import clientAuth from "../../auth/client";
+	import type { Event } from "../../models/client/event.model";
 
 	let loading = true;
 	let events: Event[] = [];

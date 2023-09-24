@@ -19,7 +19,8 @@ export const GET: APIRoute = async ({ request }) => {
 
 	const serverEvents = await eventsCollection.getEvents(user.uid);
 	const clientEvents = serverEvents.map((event) => ({
-		id: event.id,
+		...event,
+		createdAt: event.createdAt.toDate(),
 		date: event.date.toDate()
 	}) as Event);
 	return new Response(JSON.stringify(clientEvents));
