@@ -1,14 +1,15 @@
 <script lang="ts">
+	import type { User } from "firebase/auth";
 	import { onMount } from "svelte";
 	import clientAuth from "../auth/client";
 	import SignInGoogle from "./buttons/GoogleSignIn.svelte";
 
 	let loading = true;
-	let isAuthenticated = false;
+	let user: User | null;
 
 	async function logout() {
 		await clientAuth.logout();
-		isAuthenticated = false;
+		user = null;
 	}
 
 	function navigateToDashboard() {
@@ -16,16 +17,18 @@
 	}
 
 	onMount(async () => {
-		isAuthenticated = await clientAuth.isAuthenticated();
+		user = await clientAuth.getUser();
 		loading = false;
 	});
 </script>
 
 {#if loading}
 	carregando...
-{:else if !isAuthenticated}
+{:else if !user}
 	<SignInGoogle />
 {:else}
+	<p>Olá, {user.displayName}</p>
 	<button on:click={navigateToDashboard}>Dashboard</button>
-	<button on:click={logout}>Logout</button>
+	<br />
+	<button on:click={logout}>Sair</button>
 {/if}
